@@ -5,7 +5,12 @@ const {
   updateUser,
 } = require('../controllers/users');
 
-users.get('/me', getUser);
-users.patch('/me', updateUser);
+const {
+  userIdValidation,
+  updateUserValidation,
+} = require('../middlewares/validation');
+
+users.get('/me', userIdValidation, getUser);
+users.patch('/me', updateUserValidation, updateUser);
 
 module.exports = users;

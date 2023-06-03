@@ -10,8 +10,7 @@ const {
 
 const { BadRequestError } = require('../errors/BadRequestError');
 
-// eslint-disable-next-line no-unused-vars
-module.exports.handleErrors = (err, req, res, next) => {
+module.exports.handleErrors = (err, req, res) => {
   if (err.name === 'CastError') {
     return res.status(BAD_REQUEST).send({ message: incorrectDataMessage });
   }

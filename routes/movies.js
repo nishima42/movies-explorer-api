@@ -6,8 +6,13 @@ const {
   deleteMovie,
 } = require('../controllers/movies');
 
+const {
+  createMovieValidation,
+  deleteMovieValidation,
+} = require('../middlewares/validation');
+
 movies.get('/', getMovies);
-movies.post('/', createMovie);
-movies.delete('/:_id', deleteMovie);
+movies.post('/', createMovieValidation, createMovie);
+movies.delete('/:_id', deleteMovieValidation, deleteMovie);
 
 module.exports = movies;

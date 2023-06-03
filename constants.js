@@ -9,6 +9,7 @@ const movieDeletedMessage = 'Фильм удален';
 const authorizationRequiredMessage = 'Необходима авторизация';
 const incorrectDataMessage = 'Переданы некорректные данные';
 const serverErrorMessage = 'На сервере произошла ошибка';
+const pageNotFoundMessage = 'Запрашиваемый ресурс не найден';
 
 const BAD_REQUEST = 400;
 const UNAUTHORIZED = 401;
@@ -31,6 +32,7 @@ module.exports = {
   authorizationRequiredMessage,
   incorrectDataMessage,
   serverErrorMessage,
+  pageNotFoundMessage,
   BAD_REQUEST,
   UNAUTHORIZED,
   NOT_FOUND,
