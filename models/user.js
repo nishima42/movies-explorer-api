@@ -1,8 +1,10 @@
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const { BadRequestError } = require('../errors/BadRequestError');
-const wrongPassOrEmailMessage = require('../constants');
-const incorrectEmailMessage = require('../constants');
+const {
+  wrongPassOrEmailMessage,
+  incorrectEmailMessage,
+} = require('../constants');
 
 const userSchema = new mongoose.Schema({
   email: {

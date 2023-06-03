@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const incorrectLinkMessage = require('../constants');
+const { incorrectLinkMessage } = require('../constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
