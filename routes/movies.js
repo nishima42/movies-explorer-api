@@ -8,6 +8,6 @@ const {
 
 movies.get('/', getMovies);
 movies.post('/', createMovie);
-movies.detele('/:_id', deleteMovie);
+movies.delete('/:_id', deleteMovie);
 
 module.exports = movies;

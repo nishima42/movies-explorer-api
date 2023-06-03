@@ -4,10 +4,11 @@ const User = require('../models/user');
 const { ConflictError } = require('../errors/ConflictError');
 const { NotFoundError } = require('../errors/NotFoundError');
 
-const userAlreadyExistsMessage = require('../constants');
-const userNotFoundMessage = require('../constants');
-
-const CREATED = require('../constants');
+const {
+  userAlreadyExistsMessage,
+  userNotFoundMessage,
+  CREATED,
+} = require('../constants');
 
 module.exports.createUser = (req, res, next) => {
   const {

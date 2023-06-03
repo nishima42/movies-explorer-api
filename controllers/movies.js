@@ -3,11 +3,12 @@ const Movie = require('../models/movie');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { ForbiddenError } = require('../errors/ForbiddenError');
 
-const movieNotFoundMessage = require('../constants');
-const cannotDeleteMessage = require('../constants');
-const deletedMessage = require('../constants');
-
-const { CREATED } = require('../constants');
+const {
+  movieNotFoundMessage,
+  cannotDeleteMessage,
+  movieDeletedMessage,
+  CREATED,
+} = require('../constants');
 
 module.exports.createMovie = (req, res, next) => {
   const {
@@ -37,7 +38,7 @@ module.exports.createMovie = (req, res, next) => {
     nameEN,
     owner: req.user._id,
   })
-    .then((movie) => Movie.findById(movie._id).populate(['owner']))
+    .then((movie) => Movie.findById(movie._id).populate('owner'))
     .then((movie) => res.status(CREATED).send({
       _id: movie._id,
       nameRU: movie.nameRU,
@@ -58,7 +59,7 @@ module.exports.createMovie = (req, res, next) => {
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
-    .populate(['owner'])
+    .populate('owner')
     .then((movies) => res.send({ movies }))
     .catch(next);
 };
@@ -74,7 +75,7 @@ module.exports.deleteMovie = (req, res, next) => {
       }
       Movie.findByIdAndDelete(req.params._id)
         .then(() => {
-          res.send({ message: deletedMessage });
+          res.send({ message: movieDeletedMessage });
         })
         .catch(next);
     })
