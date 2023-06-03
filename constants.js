@@ -10,6 +10,7 @@ const authorizationRequiredMessage = 'Необходима авторизаци�
 const incorrectDataMessage = 'Переданы некорректные данные';
 const serverErrorMessage = 'На сервере произошла ошибка';
 const pageNotFoundMessage = 'Запрашиваемый ресурс не найден';
+const logoutMessage = 'Пользователь успешно вышел из системы';
 
 const BAD_REQUEST = 400;
 const UNAUTHORIZED = 401;
@@ -33,6 +34,7 @@ module.exports = {
   incorrectDataMessage,
   serverErrorMessage,
   pageNotFoundMessage,
+  logoutMessage,
   BAD_REQUEST,
   UNAUTHORIZED,
   NOT_FOUND,

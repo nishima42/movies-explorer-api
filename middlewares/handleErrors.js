@@ -2,6 +2,9 @@ const {
   BAD_REQUEST,
   CONFLICT,
   SERVER_ERROR,
+} = require('../constants');
+
+const {
   duplicateErrorCode,
   userAlreadyExistsMessage,
   incorrectDataMessage,
@@ -10,18 +13,22 @@ const {
 
 const { BadRequestError } = require('../errors/BadRequestError');
 
-module.exports.handleErrors = (err, req, res) => {
+module.exports.handleErrors = (err, req, res, next) => {
   if (err.name === 'CastError') {
-    return res.status(BAD_REQUEST).send({ message: incorrectDataMessage });
+    res.status(BAD_REQUEST).send({ message: incorrectDataMessage });
+    return next();
   }
   if (err.name === 'ValidationError' || err instanceof BadRequestError) {
-    return res.status(BAD_REQUEST).send({ message: incorrectDataMessage });
+    res.status(BAD_REQUEST).send({ message: incorrectDataMessage });
+    return next();
   }
   if (err.code === duplicateErrorCode) {
-    return res.status(CONFLICT).send({ message: userAlreadyExistsMessage });
+    res.status(CONFLICT).send({ message: userAlreadyExistsMessage });
+    return next();
   }
   const { statusCode = SERVER_ERROR, message } = err;
-  return res.status(statusCode).send({
+  res.status(statusCode).send({
     message: statusCode === SERVER_ERROR ? serverErrorMessage : message,
   });
+  return next();
 };

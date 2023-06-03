@@ -1,11 +1,10 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { UNAUTHORIZED } = require('../constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -23,7 +22,5 @@ module.exports.login = (req, res) => {
         })
         .send({ token });
     })
-    .catch((err) => {
-      res.status(UNAUTHORIZED).send({ message: err.message });
-    });
+    .catch(next);
 };
