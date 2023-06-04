@@ -43,7 +43,7 @@ app.use(auth);
 
 app.post('/signout', logout);
 
-app.use('/', router);
+app.use('/api', router);
 
 app.use(errorLogger);
 
