@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
+const cors = require('cors');
 
 const router = require('./routes/index');
 const { login } = require('./controllers/login');
@@ -21,7 +22,6 @@ const {
   loginValidation,
 } = require('./middlewares/validation');
 const { limiter } = require('./middlewares/limiter');
-const cors = require('./middlewares/cors');
 
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
 
@@ -36,14 +36,14 @@ app.use(cookieParser());
 app.use(requestLogger);
 app.use(helmet());
 app.use(limiter);
-app.use(cors);
+app.use(cors());
 
-app.post('/signin', loginValidation, login);
-app.post('/signup', createUserValidation, createUser);
+app.post('/api/signin', loginValidation, login);
+app.post('/api/signup', createUserValidation, createUser);
 
 app.use(auth);
 
-app.post('/signout', logout);
+app.post('/api/signout', logout);
 
 app.use('/api', router);
 
